@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Register</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" >
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+       <script
+  src="https://code.jquery.com/jquery-3.5.0.js"
+  integrity="sha256-r/AaFHrszJtwpe+tHyNi/XCfMxYpbsRg2Uqn0x3s2zc="
+  crossorigin="anonymous"></script>
+    <style>
+        .madeHeight{
+            margin-top: 40px ;
+        }
+        .rowHeight{
+            margin-top: 15px ;
+            font-size: 15px ;
+        }
+        #finalMessage{
+            text-align: center ;
+        }
+        .my-form
+{
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+}
+.hell{
+    font-size:14px ;
+}
+
+    </style>
+    <script>
+        function validate_members(){
+            var members = document.getElementById("members").value() ;
+        if(members < 0){
+            alert("Number of family cannot be negative") ;
+        }
+        }
+    </script>
+    <body>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-6-md"><p class="display-4">Registration Form</p></div>
+            </div>
+             <div class="row justify-content-center">
+            <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-header">Register</div>
+                        <div class="card-body">
+                            <form action="register" id="my-form" name="my-form"  action="success.php" >
+                                    <h1 id="finalMessage"></h1>
+                                    <div class="form-group row hell">
+                                        <label for="full_name" class="col-md-4 col-form-label text-md-right">Full Name</label>
+                                        <div class="col-md-6">
+                                            <input type="text" id="full_name" placeholder = "Name" class="form-control" name="full_name" required/>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row hell">
+                                        <label for="email_address" class="col-md-4 col-form-label text-md-right">Aadhar Number </label>
+                                        <div class="col-md-6">
+                                            <input type="text" id="adhar" placeholder = "**** **** **** ****" class="form-control" name="adhar" required/>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row hell">
+                                        <label for="user_name" class="col-md-4 col-form-label text-md-right">Contact Number </label>
+                                        <div class="col-md-6">
+                                           <input type="text" id="contact" placeholder = "Ex: +91-989898****" class="form-control" name="contact" required/>
+                                        </div>
+                                    </div>
+                                
+                                    <div class="form-group row hell">
+                                        <label for="phone_number" class="col-md-4 col-form-label text-md-right">Current Address </label>
+                                        <div class="col-md-6">
+                                            <input type="text" placeholder="Address" id="address" class="form-control" name="address" required/>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group row hell">
+                                        <label for="phone_number" class="col-md-4 col-form-label text-md-right">From when in need </label>
+                                        <div class="col-md-6">
+                                            <input type="text" placeholder="YYYY-MM-DD" id="address" class="form-control" name="date_from" required/>
+                                        </div>
+                                    </div>
+                                
+                                    <div class="form-group row hell">
+                                        <label for="present_address" class="col-md-4 col-form-label text-md-right">Company </label>
+                                        <div class="col-md-6">
+                                            <input type="text" id="company" placeholder="Ex: -- pvt. ltd." class="form-control" name="company" required/>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row hell">
+                                        <label for="permanent_address" class="col-md-4 col-form-label text-md-right">Number of Members in family</label>
+                                        <div class="col-md-6">
+                                            <input type="number" id="members" class="form-control" name="famMem" required/>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row hell">
+                                        <label for="nid_number" class="col-md-4 col-form-label text-md-right">Select Meal --></label>
+                                        <div class="col-md-6"><br>
+                                            <input type="checkbox" id="breakfast" name="BreakNeed"  value="needed">Breakfast<br>
+                                            <input type="checkbox" id="lnch" name="LunchNeed" value="needed">Lunch<br>
+                                            <input type="checkbox" id="dnr" name="DinnerNeed" value="needed">Dinner<br>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-8 justify-self-around offset-5">
+                                        <input type="submit" id="reg" onclick="validate_members()" class="btn btn-lg btn-primary" value="Register">
+                                        
+                                        <input type="reset" class="btn btn-lg btn-primary" value="Clear">
+                                    </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </body>
+    <script>
+         $(document).ready(function () {
+             console.log('entered') ;
+             $('#reg').on('click' , function(event){
+                 
+                 
+                 var f = $('#my-form').serialize() ;
+                 
+                 event.preventDefault() ;
+                 $.ajax({
+                    url:'register' , 
+                    data : f , 
+                    type : 'GET' , 
+                    success : function(data , textStatus , jqXHR){
+                        if(data.trim() === "done")
+                        {
+                            $('#finalMessage').html('Successfully Registered').css('color' , 'green').css('align' , 'center') ;
+                        }
+                        else{
+                            $('#finalMessage').html('Phone or Aadhar Number already Registered !!!').css('color','red').css('align' , 'center') ;
+                        }
+                    },
+                    error : function(jqXHR , textStatus , errorThrown)
+                    {
+                        console.log('nothing') ;
+                    }
+                 });
+             });
+         }) ;
+    </script>
+     
+</html>
